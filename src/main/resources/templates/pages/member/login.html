@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<div th:replace="~{/fragments/common/header :: headerFragment}"></div>
+<div class="login">
+  <div class="login-con">
+    <form th:action="@{/member/login}" method="post">
+      userEmail: <input type="email" name="userEmail" id="userEmail"> <br>
+      userPw: <input type="password" name="userPw" id="userPw"> <br>
+      <input type="submit" value="로그인">
+      <input type="reset" value="초기화">
+    </form>
+<div class="sns">
+  <ul>
+    <li><a href="#">구글</a></li>
+    <li><a href="#">카카오</a></li>
+    <li><a href="#">네이버</a></li>
+  </ul>
+</div>
+
+  </div>
+</div>
+<div th:replace="~{/fragments/common/footer :: footerFragment}"></div>
+</body>
+</html>

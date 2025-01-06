@@ -1,0 +1,14 @@
+@import url(common/reset.css);
+@import url(common/header.css);
+@import url(common/footer.css);
+
+.index{
+    width:100%;
+    height: calc( 100vh - 70px - 100px );
+    background-color: #eeeeee;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}

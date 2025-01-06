@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>join</title>
+    <link rel="stylesheet" th:href="@{/css/join.css}">
+</head>
+<body>
+<div th:replace="~{/fragments/common/header :: headerFragment}"></div>
+<div class="join">
+    <div class="join-con">
+        <form th:action="@{/member/join}" method="post">
+            userEmail: <input type="email" name="userEmail" id="userEmail"> <br>
+            userPw: <input type="password" name="userPw" id="userPw"> <br>
+            <input type="submit" value="회원가입">
+            <input type="reset" value="초기화">
+        </form>
+
+    </div>
+</div>
+<div th:replace="~{/fragments/common/footer :: footerFragment}"></div>
+</body>
+</html>
