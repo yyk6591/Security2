@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+    <link rel="stylesheet" th:href="@{/css/detail.css}">
+</head>
+<body>
+<div th:replace="~{/fragments/common/header :: headerFragment}"></div>
+<div class="detail">
+    <div class="detail-con">
+        <form th:action="@{/member/update}" method="post">
+          <ul>
+              <li>
+                  <label for="userEmail">이메일</label>
+                  <input type="email" name="userEmail" id="userEmail" th:value="${member.userEmail}" readonly>
+                  <input type="hidden" name="id" id="id" th:value="${member.id}">
+              </li>
+              <li>
+                  <label for="userPw">비밀번호</label>
+                  <input type="password" name="userPw" id="userPw" th:value="${member.userPw}">
+              </li>
+              <li>
+                  <label for="role">권한</label>
+                  <input type="text" name="role" id="role" th:value="${member.role}" readonly>
+              </li>
+              <li>
+                  <label for="createTime">생성시간</label>
+                  <input type="text" name="createTime" id="createTime" th:value="${member.createTime}" readonly>
+              </li>
+              <li>
+                  <label for="updateTime">수정시간</label>
+                  <input type="text" name="updateTime" id="updateTime" th:value="${member.updateTime}" readonly>
+              </li>
+              <li>
+                  <input type="submit" class="li-last" value="회원수정">
+                  <a th:href="@{/member/delete/{id}(id=${member.id})}" class="li-last">회원삭제</a>
+                  <a th:href="@{/member/memberList}" class="li-last">회원목록</a>
+              </li>
+          </ul>
+        </form>
+
+    </div>
+</div>
+<div th:replace="~{/fragments/common/footer :: footerFragment}"></div>
+</body>
+</html>

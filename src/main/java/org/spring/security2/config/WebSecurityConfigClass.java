@@ -29,7 +29,7 @@ public class WebSecurityConfigClass {
                         .requestMatchers("/css/**","/js/**","/images/**").permitAll()
                         .requestMatchers("/board","/board/boardList","/board/write").permitAll()
                         .requestMatchers("/member/logout").authenticated()
-                        .requestMatchers("/member/**").hasAnyRole("ADMIN","MEMBER")
+                        .requestMatchers("/member/**").hasAnyRole("ADMIN","MEMBER","MANAGER")
                         .requestMatchers("/board/**").hasAnyRole("ADMIN","MEMBER")
                         .requestMatchers("/shop","/shop/index").hasAnyRole("ADMIN","MANAGER")
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN")

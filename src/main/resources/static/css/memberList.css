@@ -1,10 +1,10 @@
-@import url(common/reset.css);
-@import url(common/header.css);
-@import url(common/footer.css);
+@import url(/css/common/reset.css);
+@import url(/css/common/header.css);
+@import url(/css/common/footer.css);
 
 .memberList{
     width:100%;
-    height: calc( 100vh - 70px - 100px );
+    height: calc( 100vh - 60px - 150px );
     background-color: #eeeeee;
 
     display:flex;
@@ -12,3 +12,79 @@
     align-items:center;
 
 }
+.memberList table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+.delete{
+    color:#ff0000;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #444;
+    color: #fff;
+    font-weight: bold;
+}
+.paging{
+        flex:1;
+        display:flex;
+        justify-content:center;
+
+        }
+        .paging-con{
+
+
+        }
+        .paging ul{
+        flex: 0 1 150px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap: 1px;
+
+        }
+         .paging ul li{
+
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+
+        }
+        .now{
+        padding;2px;
+        background-color:#cccccc;
+        }
+        .ex{
+        padding;2px;
+        background-color:#ff0000;
+        color:#ffffff;
+        }
+        .search{
+        display:flex;
+        justify-content:flex-end;
+        align-items:center;
+        }
+        .search form{
+            flex: 0 1 300px;
+              display:flex;
+        justify-content:space-between;
+        align-items:center;
+
+        }
+        .search form select{
+        flex:1;
+        }
+        .search form #search{
+        flex:3;
+        }
+        .search form input[type=button]{
+        flex:1;
+        }
+

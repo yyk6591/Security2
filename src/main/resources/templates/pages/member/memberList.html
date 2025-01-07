@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>memberList</title>
     <link rel="stylesheet" th:href="@{/css/memberList.css}">
     <style>
         th,td,table{
-          border:1px solid;
+        border-collapse: collapse;
+        box-sizing: border-box;
+          border: 1px solid #cccccc;
+        }
+        th,td{
+            padding:1vmin;
+             box-sizing: border-box;
         }
     </style>
 </head>
@@ -14,6 +21,18 @@
 <div th:replace="~{/fragments/common/header :: headerFragment}"></div>
 <div class="memberList">
   <div class="memberList-con">
+      <div class="top">
+          <div class="search">
+              <form th:action="@{/member/memberList}" method="get">
+                  <select name="subject" id="subject">
+                      <option value="" th:selected="${#strings.isEmpty( param.subject )}">::선택::</option>
+                      <option value="userEmail" th:selected="${#strings.equals(param.subject, 'userEmail')}">userEmail</option>
+                      <option value="role" th:selected="${#strings.equals(param.subject, 'role')}">role</option>
+                  </select>
+                  <input type="text" name="search" id="searchFn" th:value="${param.search}" placeholder="검색어입력">
+                  <input type="submit" value="검색" >
+              </form>
+          </div>
       <table>
           <thead>
           <tr>
@@ -23,10 +42,18 @@
               <th>Role</th>
               <th>createTime</th>
               <th>updateTime</th>
-              <th>보기</th>
+              <!-- 로그인, 관리자권한, 본인 -->
+              <th:block sec:authorize="isAuthenticated()">
+                  <th>보기</th>
+              </th:block>
+              <!-- 로그인, 관리자권한, 본인 -->
+              <th:block sec:authorize="isAuthenticated()">
+                  <th>삭제</th>
+              </th:block>
+
           </tr>
           </thead>
-          <tbody class="t-body">
+          <tbody>
           <tr th:each=" member: ${memberList} ">
               <td th:text="${member.id}"></td>
               <td th:text="${member.userEmail}"></td>
@@ -34,10 +61,78 @@
               <td th:text="${member.role}"></td>
               <td th:text="${#temporals.format(member.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
               <td th:text="${#temporals.format(member.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-              <td><a th:href="@{/member/detail/{id}(id=${member.id})}">상세보기</a></td>
+              <th:block sec:authorize="isAuthenticated()">
+                  <th:block sec:authorize="hasRole('ADMIN')">
+                      <td><a th:href="@{/member/detail/{id}(id=${member.id})}" class="delete">상세보기</a></td>
+                  </th:block>
+                  <th:block sec:authorize="!hasRole('ADMIN')">
+                      <th:block th:if="${#authentication.principal.memberEntity.userEmail == member.userEmail}">
+                          <td><a th:href="@{/member/detail/{id}(id=${member.id})}" class="delete">상세보기</a></td>
+                      </th:block>
+                      <th:block th:unless="${#authentication.principal.memberEntity.userEmail == member.userEmail}">
+                          <td><span>상세보기</span></td>
+                      </th:block>
+                  </th:block>
+              </th:block>
+
+              <!-- 로그인, 관리자권한, 본인 -->
+              <th:block sec:authorize="isAuthenticated()">
+                  <!-- ADMIN 권한인 경우 모든 항목 삭제 가능 -->
+                  <th:block sec:authorize="hasRole('ADMIN')">
+                      <td>
+                          <a th:href="@{/member/delete/deletePage/{id}(id=${member.id})}" class="delete">삭제페이지이동</a>
+                      </td>
+                  </th:block>
+                  <th:block sec:authorize="!hasRole('ADMIN')">
+                      <th:block th:if="${#authentication.principal.memberEntity.userEmail == member.userEmail}">
+                          <td>
+                              <a th:href="@{/member/delete/deletePage/{id}(id=${member.id})}" class="delete">삭제페이지이동</a>
+                          </td>
+                      </th:block>
+                      <th:block th:unless="${#authentication.principal.memberEntity.userEmail == member.userEmail}">
+                          <td><span>삭제</span></td>
+                      </th:block>
+                  </th:block>
+              </th:block>
           </tr>
           </tbody>
       </table>
+      </div>
+
+      <div class="paging">
+          <div class="paging-con">
+              <ul>
+                  <li>
+                      <span th:if="${memberList.pageable.pageNumber+1 eq 1}" class="span0">start</span>
+                      <span th:unless="${memberList.pageable.pageNumber+1 eq 1}">
+                <a th:href="@{/member/memberList(page=0)}" class="span1">처음</a>
+            </span>
+                  </li>
+                  <li>
+                      <span th:if="${1==memberList.pageable.pageNumber+1}" class="span0">pre</span>
+                      <span th:unless="${1==memberList.pageable.pageNumber+1}">
+                <a th:href="@{/member/memberList(page=${memberList.pageable.pageNumber-1})}" class="span1">다음</a>
+            </span>
+                  </li>
+                  <li th:each="i : ${#numbers.sequence(startPage,endPage)}" class="block">
+                      <span th:if="${i == memberList.pageable.pageNumber+1} " th:text="${i}" class="now"></span>
+                      <a th:unless="${i == memberList.pageable.pageNumber+1}" th:href="@{/member/memberList(page=${i-1})}" th:text="${i}" class="ex"></a>
+                  </li>
+                  <li>
+                      <span th:if="${memberList.totalPages ==memberList.pageable.pageNumber+1}" class="span0">next</span>
+                      <span th:unless="${memberList.totalPages ==memberList.pageable.pageNumber+1}">
+                <a th:href="@{/member/memberList(page=${memberList.pageable.pageNumber+1})}" class="span1">다음</a>
+            </span>
+                  </li>
+                  <li>
+                      <span th:if="${memberList.totalPages==memberList.pageable.pageNumber+1}" class="span0">end</span>
+                      <span th:unless="${memberList.totalPages==memberList.pageable.pageNumber+1}">
+                <a th:href="@{/member/memberList(page=${memberList.totalPages-1})}" class="span1">마지막</a>
+            </span>
+                  </li>
+              </ul>
+          </div>
+      </div>
 
   </div>
 </div>
