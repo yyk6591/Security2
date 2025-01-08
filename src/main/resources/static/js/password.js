@@ -44,25 +44,37 @@ const deletePageOkFn = (event) => {
         return;
     }
 
+    //확인 누르면 true, 취소 누르면 false
+//    if (confirm("회원삭제하시겠습니까?")){
+//        return;
+//    }
+
     const url = `/api/member/delete/${id.value}`;
 
-    fetch(url, {
-        method: "DELETE"
-    })
+    fetch(url)
         .then(response => {
             if (response.ok) {
                 return response.json();
+
             } else {
                 alert("회원 삭제 중 오류가 발생했습니다.");
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
         })
         .then(data => {
-            if (data) {
+            if (data==true) {
                 alert("회원이 성공적으로 삭제되었습니다.");
-                window.location.href = "/member/memberList"; // 삭제 후 회원 목록으로 이동
+                //본인 계정 삭제할 경우만 해당
+
+                if(role.value!='ADMIN'){
+                                location.hrf="/member/logout";
+                }else{
+                location.href = "/member/memberList";
+                }
+
             } else {
                 alert("회원 삭제 실패.");
+                history.go(-1);
             }
         })
         .catch(err => {

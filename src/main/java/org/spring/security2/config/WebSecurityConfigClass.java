@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -25,12 +27,14 @@ public class WebSecurityConfigClass {
 
         //2.사용자 요청에 대한 권한 설정
         http.authorizeHttpRequests(authorize->
-                authorize.requestMatchers("/","/index","/member/join","/member/login","/member/memberList").permitAll()
+                authorize.requestMatchers("/","/index","/member/join","/member/login").permitAll()
                         .requestMatchers("/css/**","/js/**","/images/**").permitAll()
-                        .requestMatchers("/board","/board/boardList","/board/write").permitAll()
+                        .requestMatchers("/board/boardList").permitAll()
                         .requestMatchers("/member/logout").authenticated()
-                        .requestMatchers("/member/**").hasAnyRole("ADMIN","MEMBER","MANAGER")
-                        .requestMatchers("/board/**").hasAnyRole("ADMIN","MEMBER")
+                        .requestMatchers("/member/memberList").hasAnyRole("ADMIN")
+//                        .requestMatchers("/member/**").hasAnyRole("ADMIN","MEMBER","MANAGER")
+//                        .requestMatchers("/board/**").permitAll()
+                        .requestMatchers("/board/write").authenticated()
                         .requestMatchers("/shop","/shop/index").hasAnyRole("ADMIN","MANAGER")
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN")
                         .anyRequest().authenticated()
@@ -42,7 +46,9 @@ public class WebSecurityConfigClass {
                         .usernameParameter("userEmail")
                         .passwordParameter("userPw")
                         .loginProcessingUrl("/member/login")  //POST 로그인 URL
-                        .defaultSuccessUrl("/")
+                        .successHandler(customAuthenticationSuccessHandler())
+                        .failureHandler(customAuthenticationFailureHandler())
+//                        .defaultSuccessUrl("/")
         );
 
         //4.로그아웃
@@ -52,6 +58,16 @@ public class WebSecurityConfigClass {
         );
 
         return http.build();
+    }
+
+    @Bean
+    public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler(){
+        return new CustomAuthenticationSuccessHandler();
+    }
+
+    @Bean
+    public CustomAuthenticationFailureHandler customAuthenticationFailureHandler(){
+        return new CustomAuthenticationFailureHandler();
     }
 
 

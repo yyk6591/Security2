@@ -23,6 +23,7 @@
     </li>
         <li>
           <input type="hidden" id="pwChecked" value="false">
+          <input type="hidden" id="role" th:value="${#authentication.principal.memberEntity.role}">
         </li>
         <li>
           <input type="button" class="li-last" onclick="deletePageOkFn(event)" value="회원삭제">

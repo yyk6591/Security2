@@ -27,5 +27,5 @@ public interface MemberService {
 
     boolean passwordCheckedFn(String userPw, Long id);
 
-    void memberDeletePage(Long id); //로그아웃안되는거임
+    boolean memberDeletePage(Long id);
 }

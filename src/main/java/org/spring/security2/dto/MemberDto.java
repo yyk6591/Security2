@@ -31,6 +31,7 @@ public class MemberDto {
 
     private LocalDateTime updateTime;
 
+//    private Long boardId;
     private List<BoardEntity> boardEntities;
 
 

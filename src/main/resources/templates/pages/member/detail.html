@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>detail</title>
@@ -34,7 +35,8 @@
               </li>
               <li>
                   <input type="submit" class="li-last" value="회원수정">
-                  <a th:href="@{/member/delete/{id}(id=${member.id})}" class="li-last">회원삭제</a>
+<!--                  <a th:href="@{/member/delete/{id}(id=${member.id})}" class="li-last">회원삭제</a>-->
+                  <a th:href="@{/member/delete/deletePage/{id}(id=${member.id})}" class="delete">삭제페이지이동</a>
                   <a th:href="@{/member/memberList}" class="li-last">회원목록</a>
               </li>
           </ul>

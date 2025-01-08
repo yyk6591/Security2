@@ -146,13 +146,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void memberDeletePage(Long id) {
+    public boolean memberDeletePage(Long id) {
 
         MemberEntity memberEntity = memberRepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("회원아이디가 존재하지 않습니다");
         });
         memberRepository.deleteById(id);
 
+        return true;
     }
 
 

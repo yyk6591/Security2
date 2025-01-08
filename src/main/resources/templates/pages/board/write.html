@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>write</title>
+  <link rel="stylesheet" th:href="@{/css/write.css}">
+</head>
+<body>
+<div th:replace="~{/fragments/common/header :: headerFragment}"></div>
+<div class="write">
+  <div class="write-con">
+    <form th:action="@{/board/write}" method="post" enctype="multipart/form-data">
+      title: <input type="text" name="title" id="title"> <br>
+      content: <input type="text" name="content" id="content"> <br>
+      writer: <input type="text" name="writer" id="writer"> <br>
+      memberId: <input type="text" name="memberId" id="memberId" th:value="${#authentication.principal.memberEntity.id}" > <br>
+      image: <input type="file" name="boardImgFile" id="boardImgFile"> <br>
+      <input type="submit" value="게시판등록">
+      <input type="reset" value="초기화">
+    </form>
+  </div>
+</div>
+<div th:replace="~{/fragments/common/footer :: footerFragment}"></div>
+
+</body>
+</html>

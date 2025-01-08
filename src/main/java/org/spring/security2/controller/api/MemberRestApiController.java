@@ -23,12 +23,12 @@ public class MemberRestApiController {
         return ResponseEntity.status(HttpStatus.OK).body(bool);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping ("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        System.out.println("삭제 요청 아이디: " + id);
-        memberServiceImpl.memberDeletePage(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body(true);
+      boolean bool= memberServiceImpl.memberDeletePage(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(bool);
     }
 
 
