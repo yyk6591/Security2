@@ -25,7 +25,8 @@ public class MyUserDetailService implements UserDetailsService {
          throw new UsernameNotFoundException("이메일이 존재하지 않습니다");
      }
 
-        return new MyUserDetails(optionalMemberEntity.get()); //전역 회원가입가능
+//        return new MyUserDetails(optionalMemberEntity.get()); //전역 회원가입가능
+        return new MyUserDetailsImpl(optionalMemberEntity.get());
     }
 
 }

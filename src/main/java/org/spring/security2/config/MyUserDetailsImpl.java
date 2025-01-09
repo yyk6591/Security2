@@ -1,6 +1,9 @@
 package org.spring.security2.config;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.spring.security2.entity.MemberEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,14 +12,34 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
-@Data
-public class MyUserDetails implements UserDetails {
+@NoArgsConstructor
+@Getter
+@Setter
+public class MyUserDetailsImpl implements UserDetails , OAuth2User {
+
+    private Map<String, Object> getAttributes;
 
     private MemberEntity memberEntity;
 
-    public MyUserDetails(MemberEntity memberEntity){
+    public MyUserDetailsImpl(MemberEntity memberEntity){
         this.memberEntity=memberEntity;
+    }
+
+    public MyUserDetailsImpl(MemberEntity memberEntity, Map<String, Object> getAttributes) {
+        this.memberEntity=memberEntity;
+        this.getAttributes=getAttributes;
+
+    }
+
+
+
+
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return getAttributes;
     }
 
 
@@ -31,20 +54,6 @@ public class MyUserDetails implements UserDetails {
         });
 
         return collectRoles;
-    }
-
-    public Long getId(){
-        return  memberEntity.getId();
-    }
-
-    @Override
-    public String getPassword() {
-        return memberEntity.getUserPw();
-    }
-
-    @Override
-    public String getUsername() {
-        return memberEntity.getUserEmail();
     }
 
     @Override
@@ -68,4 +77,19 @@ public class MyUserDetails implements UserDetails {
     }
 
 
+
+    @Override
+    public String getPassword() {
+        return memberEntity.getUserPw();
+    }
+
+    @Override
+    public String getUsername() {
+        return memberEntity.getUserEmail();
+    }
+
+    @Override
+    public String getName() {
+        return memberEntity.getUserEmail();
+    }
 }
