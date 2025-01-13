@@ -25,6 +25,8 @@ public class MemberDto {
 
     private String userPw;
 
+    private String userName;
+
     private Role role;
 
     private LocalDateTime createTime;
@@ -43,6 +45,7 @@ public class MemberDto {
         memberDto.setId(memberEntity.getId());
         memberDto.setUserEmail(memberEntity.getUserEmail());
         memberDto.setUserPw(memberEntity.getUserPw());
+        memberDto.setUserName(memberDto.getUserName());
         memberDto.setRole(memberEntity.getRole());
         memberDto.setCreateTime(memberEntity.getCreateTime());
         memberDto.setUpdateTime(memberEntity.getUpdateTime());

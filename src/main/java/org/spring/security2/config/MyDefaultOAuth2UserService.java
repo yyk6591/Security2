@@ -47,10 +47,26 @@ public class MyDefaultOAuth2UserService extends DefaultOAuth2UserService {
     private OAuth2User oAuth2UserSuccess(OAuth2User oAuth2User, String registrationId) {
         String userEmail="";
         String userPw="";
+        String userName="";
 
         if(registrationId.equals("google")){
             userEmail=oAuth2User.getAttribute("email");
+            userName=oAuth2User.getAttribute("name");
+        }else if(registrationId.equals("naver")){
+            Map<String,Object> response=(Map<String, Object>) oAuth2User.getAttributes().get("response");
+
+            userEmail=(String) response.get("email");
+            userName=(String) response.get("name");
+
+        }else if(registrationId.equals("kakao")){
+            Map<String,Object> kakao_account=(Map<String, Object>) oAuth2User.getAttributes().get("kakao_account");
+            Map<String,Object> profile=(Map<String, Object>) kakao_account.get("profile");
+
+            userName=(String) profile.get("nickname");
+            userEmail=(String) kakao_account.get("email");
+
         }
+
         Optional<MemberEntity> optionalMemberEntity=memberRepository.findByUserEmail(userEmail);
 
         if(optionalMemberEntity.isPresent()){
@@ -62,6 +78,7 @@ public class MyDefaultOAuth2UserService extends DefaultOAuth2UserService {
                 MemberEntity.builder()
                         .userEmail(userEmail)
                         .userPw(userPw)
+                        .userName(userName)
                         .role(Role.MEMBER).build());
 
         return new MyUserDetailsImpl(memberEntity,oAuth2User.getAttributes());

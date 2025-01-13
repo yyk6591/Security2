@@ -35,6 +35,7 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(MemberEntity.builder()
                         .userEmail(memberDto.getUserEmail())
                         .userPw(passwordEncoder.encode(memberDto.getUserPw()))
+                        .userName(memberDto.getUserName())
                         .role(Role.MEMBER)
                 .build());
 
@@ -71,6 +72,7 @@ public class MemberServiceImpl implements MemberService {
                         .id(memberDto.getId())
                         .userEmail(memberDto.getUserEmail())
                         .userPw(memberDto.getUserPw())
+                                .userName(memberDto.getUserName())
                         .role(memberDto.getRole())
                         .build());
             }else {
@@ -83,6 +85,7 @@ public class MemberServiceImpl implements MemberService {
                         .id(memberDto.getId())
                         .userEmail(memberDto.getUserEmail())
                         .userPw(passwordEncoder.encode(memberDto.getUserPw()))
+                                .userName(memberDto.getUserName())
                         .role(memberDto.getRole())
                         .build());
             }

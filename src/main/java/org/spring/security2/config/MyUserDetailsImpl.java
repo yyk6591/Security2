@@ -90,6 +90,6 @@ public class MyUserDetailsImpl implements UserDetails , OAuth2User {
 
     @Override
     public String getName() {
-        return memberEntity.getUserEmail();
+        return memberEntity.getUserName();
     }
 }

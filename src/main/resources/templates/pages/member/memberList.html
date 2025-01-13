@@ -39,6 +39,7 @@
               <th>id</th>
               <th>userEmail</th>
               <th>userPw</th>
+              <th>userName</th>
               <th>Role</th>
               <th>createTime</th>
               <th>updateTime</th>
@@ -58,6 +59,7 @@
               <td th:text="${member.id}"></td>
               <td th:text="${member.userEmail}"></td>
               <td th:text="${member.userPw}"></td>
+              <td th:text="${member.userName}"></td>
               <td th:text="${member.role}"></td>
               <td th:text="${#temporals.format(member.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
               <td th:text="${#temporals.format(member.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>

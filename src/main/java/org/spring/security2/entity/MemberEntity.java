@@ -28,6 +28,9 @@ public class MemberEntity extends BasicTime {
     @Column(nullable = false)
     private String userPw;
 
+    @Column(nullable = false)
+    private String userName;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -43,6 +46,7 @@ public class MemberEntity extends BasicTime {
 
         memberEntity.setUserEmail(memberDto.getUserEmail());
         memberEntity.setUserPw(memberDto.getUserPw());
+        memberEntity.setUserName(memberEntity.getUserName());
         memberEntity.setRole(Role.MEMBER);
 
         return memberEntity;
@@ -55,6 +59,7 @@ public class MemberEntity extends BasicTime {
         memberEntity.setId(memberDto.getId());
         memberEntity.setUserEmail(memberDto.getUserEmail());
         memberEntity.setUserPw(memberDto.getUserPw());
+        memberEntity.setUserName(memberEntity.getUserName());
         memberEntity.setRole(memberDto.getRole());
 
         return memberEntity;
