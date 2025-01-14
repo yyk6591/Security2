@@ -35,7 +35,7 @@ public class WebSecurityConfigClass {
 
         //2.사용자 요청에 대한 권한 설정
         http.authorizeHttpRequests(authorize->
-                authorize.requestMatchers("/","/index","/member/join","/member/login").permitAll()
+                authorize.requestMatchers("/","/index","/member/join","/member/login","/websocket","/chat").permitAll()
                         .requestMatchers("/css/**","/js/**","/images/**").permitAll()
                         .requestMatchers("/board/boardList").permitAll()
                         .requestMatchers("/member/logout").authenticated()

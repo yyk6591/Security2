@@ -11,4 +11,10 @@ public class HomeController {
     public String index(){
         return "index";
     }
+
+    @GetMapping("/websocket")
+    public String chat(){
+        return "/pages/chat/chat";
+    }
+
 }
