@@ -3,15 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <title>adminIndex</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/admin/index.js}" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
-<div th:replace="~{/fragments/common/header :: headerFragment}"></div>
-<div class="admin">
-  <div class="admin-con">
-    admin Page
 
-  </div>
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li>
+                <a th:href="@{/}">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                    <span class="title">ADMIN</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/}">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                    <span class="title">HOME</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/memberList}">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                    <span class="title">memberList</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/boardList}">
+                        <span class="icon">
+                            <ion-icon name="document-text-outline"></ion-icon>
+                        </span>
+                    <span class="title">boardList</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/item/insert}">
+                        <span class="icon">
+                            <ion-icon name="gift-outline"></ion-icon>
+                        </span>
+                    <span class="title">ItemInsert</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/item/itemList}">
+                        <span class="icon">
+                            <ion-icon name="document-outline"></ion-icon>
+                        </span>
+                    <span class="title">ItemList</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/item/cartList}">
+                        <span class="icon">
+                            <ion-icon name="cart-outline"></ion-icon>
+                        </span>
+                    <span class="title">cartList</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/item/paymentList}">
+                        <span class="icon">
+                            <ion-icon name="wallet-outline"></ion-icon>
+                        </span>
+                    <span class="title">paymentList</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/item/shopList}">
+                        <span class="icon">
+                            <ion-icon name="bag-outline"></ion-icon>
+                        </span>
+                    <span class="title">shopList</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="topBar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+            <div class="right-top">
+                <ul>
+                    <li><a th:href="@{/admin/memberDetail}">MY PROFILE</a></li>
+                    <li><a th:href="@{/shop}">SHOP</a></li>
+                    <li><a th:href="@{/member/logout}">LOGOUT</a></li>
+                </ul>
+            </div>
+            <div class="admin-home">
+                <div class="admin-home-con">
+                    <div class="admin-home-title">
+                        <h2>ADMIN-HOME</h2>
+                    </div>
+                <div class="admin-dashboard">
+                    <div class="admin-dashboard-con">
+                        <ul>
+                            <li><a href=""><img src="" alt=""></a></li>
+                            <li><a href=""><img src="" alt=""></a></li>
+                            <li><a href=""><img src="" alt=""></a></li>
+                            <li><a href=""><img src="" alt=""></a></li>
+                            <li><a href=""><img src="" alt=""></a></li>
+                            <li><a href=""><img src="" alt=""></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
-<div th:replace="~{/fragments/common/footer :: footerFragment}"></div>
+
 </body>
 </html>
