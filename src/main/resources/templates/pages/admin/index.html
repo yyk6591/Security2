@@ -5,8 +5,10 @@
     <title>adminIndex</title>
     <link rel="stylesheet" th:href="@{/css/admin.css}">
     <script th:src="@{/js/admin/index.js}" defer></script>
+    <script th:src="@{/js/admin/chart.js}" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 </head>
 <body>
 
@@ -100,29 +102,54 @@
                     <li><a th:href="@{/member/logout}">LOGOUT</a></li>
                 </ul>
             </div>
-            <div class="admin-home">
-                <div class="admin-home-con">
-                    <div class="admin-home-title">
-                        <h2>ADMIN-HOME</h2>
-                    </div>
-                <div class="admin-dashboard">
-                    <div class="admin-dashboard-con">
-                        <ul>
-                            <li><a href=""><img src="" alt=""></a></li>
-                            <li><a href=""><img src="" alt=""></a></li>
-                            <li><a href=""><img src="" alt=""></a></li>
-                            <li><a href=""><img src="" alt=""></a></li>
-                            <li><a href=""><img src="" alt=""></a></li>
-                            <li><a href=""><img src="" alt=""></a></li>
-                        </ul>
-                    </div>
+        </div>
+        <div class="cardBox">
+            <div class="card">
+                <div>
+                    <div class="content">-1ºC</div>
+                    <div class="cardName">weather</div>
                 </div>
-
-
+                <div class="iconBx">
+                    <ion-icon name="cloud-outline"></ion-icon>
                 </div>
             </div>
 
+            <div class="card">
+                <div>
+                    <div class="content">1월 16일</div>
+                    <div class="cardName">date</div>
+                </div>
+                <div class="iconBx">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <div class="content">10명</div>
+                    <div class="cardName">member</div>
+                </div>
+                <div class="iconBx">
+                    <ion-icon name="people-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <div class="content">12개</div>
+                    <div class="cardName">item</div>
+                </div>
+                <div class="iconBx">
+                    <ion-icon name="cart-outline"></ion-icon>
+                </div>
+            </div>
         </div>
+        <div class="chartsBx">
+            <div class="chart"> <canvas id="chart-1"></canvas> </div>
+            <div class="chart"> <canvas id="chart-2"></canvas> </div>
+        </div>
+
+
     </div>
 </div>
 

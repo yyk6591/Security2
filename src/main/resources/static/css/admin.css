@@ -181,7 +181,7 @@
 .right-top ul li {
   margin: 0 20px;
   position: relative;
-  gap: 10px;
+
   align-items: center;
 }
 
@@ -192,14 +192,11 @@
   padding: 8px 15px;
   border-radius: 5px;
   display: flex;
-  /* 플렉스 컨테이너 설정 */
   align-items: center;
-  /* 수직 중앙 정렬 */
   justify-content: center;
-  /* 가로 중앙 정렬 */
   transition: background-color 0.3s, color 0.3s;
   white-space: nowrap;
-  /* 글자 줄바꿈 방지 */
+
 }
 
 .right-top ul li a:hover {
@@ -207,42 +204,74 @@
   color: var(--white);
 }
 
-
-.admin-home {
+.cardBox {
   position: relative;
-  width: 80%;
+  width: 100%;
   padding: 20px;
-  margin-top: 900px;
-  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
 }
 
-.admin-home .admin-home-con {
-  margin: 0 auto;
-  max-width: 800px;
-  min-height: 800px;
+.cardBox .card {
+  position: relative;
   background: var(--white);
-  padding: 20px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  padding: 30px;
   border-radius: 20px;
-}
-
-.admin-home .admin-home-con .admin-home-title {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
 
-.admin-home .admin-home-con .admin-home-title h2 {
-  font-weight: 600;
+.cardBox .card .content {
+  position: relative;
+  font-weight: 500;
+  font-size: 2.5rem;
   color: var(--blue);
 }
 
-.admin-home ul {
+.cardBox .card .cardName {
+  color: var(--black2);
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+.cardBox .card .iconBx {
+  font-size: 3.5rem;
+  color: var(--black2);
+}
+
+.cardBox .card:hover {
+  background: var(--blue);
+}
+.cardBox .card:hover .content,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBx {
+  color: var(--white);
+}
+
+
+.chartsBx{
+  position: relative;
+  width: 100%;
+  padding: 20px;
   display: grid;
-
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 30px;
+  margin-left:50px;
 }
 
-.admin-home ul li {
-  grid-template-columns: repeat(3, );
+.chartsBx .chart{
+  position: relative;
+  background: #fff;
+  padding: 10px;
+  width: 90%;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  border: 1px solid var(--blue);
 }
+
+
+
+
