@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>insert</title>
+  <link rel="stylesheet" th:href="@{/css/common/reset.css}">
+</head>
+<body>
+<h1>상품등록</h1>
+<div class="item-insert">
+  <div class="item-insert-con">
+    <form th:action="@{/item/insert}" method="post" enctype="multipart/form-data">
+      itemName: <input type="text" name="itemName" id="itemName"> <br>
+      itemDetail: <input type="text" name="itemDetail" id="itemDetail"> <br>
+      itemWriter: <input type="text" name="itemWriter" id="itemWriter"> <br>
+      itemPrice: <input type="text" name="itemPrice" id="itemPrice"  > <br>
+      작성자: <input type="text" name="memberId" id="memberId" th:value="${myUserDetails.memberEntity.id}" readonly> <br>
+      itemImgFile: <input type="file" name="itemImgFile" id="itemImgFile"> <br>
+      <input type="submit" value="상품등록">
+      <input type="reset" value="초기화">
+    </form>
+  </div>
+</div>
+</body>
+</html>

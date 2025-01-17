@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>itemDetail</title>
+</head>
+<body>
+<div class="itemDetail">
+  <div class="itemDetail-con">
+    <h1>상품상세정보</h1>
+    <form th:action="@{/item/update}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="id" th:value="${item.id}">
+      itemName: <input type="text" name="itemName" id="itemName" th:value="${item.itemName}"> <br>
+      itemDetail: <input type="text" name="itemDetail" id="itemDetail" th:value="${item.itemDetail}"> <br>
+      itemWriter: <input type="text" name="itemWriter" id="itemWriter" th:value="${item.itemWriter}"> <br>
+      itemPrice: <input type="text" name="itemPrice" id="itemPrice" th:value="${item.itemPrice}"> <br>
+      hit: <input type="text" name="hit" id="hit" th:value="${item.hit}" readonly> <br>
+      이미지유무: <input type="text" name="isImage" id="isImage" th:value="${item.isImage}" readonly> <br>
+      등록자: <input type="text" name="memberId" id="memberId" th:value="${item.memberId}" readonly> <br>
+      <th:block th:if="${item.isImage==1}">
+        <img th:src="@{|/upload/${item.newImgName}|}" width="100" height="100" alt=""> <br>
+        File: <input type="file" name="itemImgFile" id="itemImgFile1" th:value="${item.newImgName}"> <br>
+      </th:block>
+      <th:block th:unless="${item.isImage==1}">
+        <img src="https://placehold.co/100x100?text=IMAGE\nNO" alt=""> <br>
+        File: <input type="file" name="itemImgFile" id="itemImgFile2"> <br>
+      </th:block>
+      <span th:text="${item.createTime}"></span> <br>
+      <span th:text="${item.updateTime}"></span> <br>
+
+
+      <input type="submit" value="상품수정"> <br>
+      <a th:href="@{/item/delete/{id}(id=${item.id})}">상품삭제</a>
+      <a th:href="@{/cart/addCart/memberId/{memberId}/id/{id}(memberId=${myUserDetails.memberEntity.id},id=${item.id})}">장바구니1(전체장바구니)</a>
+      <a th:href="@{/cart/addCart2/memberId/{memberId}/id/{id}(memberId=${myUserDetails.memberEntity.id},id=${item.id})}">장바구니2(개인장바구니)</a>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

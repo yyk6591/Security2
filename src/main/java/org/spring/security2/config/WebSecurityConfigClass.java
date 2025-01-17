@@ -45,6 +45,8 @@ public class WebSecurityConfigClass {
                         .requestMatchers("/board/write").authenticated()
                         .requestMatchers("/shop","/shop/index").hasAnyRole("ADMIN","MANAGER")
                         .requestMatchers("/admin/**").permitAll()
+                        .requestMatchers("/item/insert","/item/itemList").hasAnyRole("ADMIN","MEMBER")
+                        .requestMatchers("/cart/cartList","/cart/cartList2").hasAnyRole("ADMIN","MEMBER")
                         .anyRequest().authenticated()
         );
 

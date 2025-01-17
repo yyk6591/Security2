@@ -1,5 +1,6 @@
 package org.spring.security2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.spring.security2.common.BasicTime;
@@ -38,6 +39,12 @@ public class MemberEntity extends BasicTime {
     mappedBy = "memberEntity",
     cascade = CascadeType.REMOVE)
     private List<BoardEntity> boardEntities;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "memberEntity",
+            cascade = CascadeType.REMOVE)
+    private List<ItemEntity> itemEntities;
 
 
     // 회원 등록

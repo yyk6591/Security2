@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>cartList</title>
+    <style>
+        th,td,table{
+          border:1px solid;
+        }
+    </style>
+</head>
+<body>
+<div class="cartList">
+    <div class="cartList-con">
+        <table>
+
+            <tr>
+                <td>id</td>
+                <td>memberId</td>
+                <td>itemSize</td>
+                <td>itemId</td>
+                <td>itemName</td>
+                <td>itemDetail</td>
+                <td>itemWriter</td>
+                <td>itemPrice</td>
+                <td>hit</td>
+                <td>isImage</td>
+                <td>이미지</td>
+                <td>createTime</td>
+                <td>updateTime</td>
+                <td>선택</td>
+
+            </tr>
+
+
+            <tr th:each="item : ${itemList}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.cartEntity.memberEntity.id}"></td>
+                <td th:text="${item.itemSize}"></td>
+
+                        <th:block th:each="item2 : ${item.itemEntity}">
+                            <td th:text="${item2.id}"></td>
+                            <td th:text="${item2.itemName}"></td>
+                            <td th:text="${item2.itemDetail}"></td>
+                            <td th:text="${item2.itemWriter}"></td>
+                            <td th:text="${item2.itemPrice}"></td>
+                            <td th:text="${item2.hit}"></td>
+                            <td th:text="${item2.isImage}"></td>
+                            <td>
+                                <th:block th:if="${item2.isImage == 1}">
+                                    <img th:src="@{|/upload/${item2.itemImgEntities[0].newImgName}|}" width="100" height="100" alt="Item Image">
+                                </th:block>
+                                <th:block th:unless="${item2.isImage == 1}">
+                                    <img src="https://placehold.co/100x100?text=No+Image" alt="Default Image">
+                                </th:block>
+                            </td>
+                        </th:block>
+
+
+                <td th:text="${item.createTime}"></td>
+                <td th:text="${item.updateTime}"></td>
+
+                <td>
+                    <input type="checkbox" th:name="'selectedCartIds'" th:value="${item.id}">
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

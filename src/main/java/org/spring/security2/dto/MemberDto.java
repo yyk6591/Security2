@@ -3,6 +3,7 @@ package org.spring.security2.dto;
 import lombok.*;
 import org.spring.security2.common.Role;
 import org.spring.security2.entity.BoardEntity;
+import org.spring.security2.entity.ItemEntity;
 import org.spring.security2.entity.MemberEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -33,8 +34,9 @@ public class MemberDto {
 
     private LocalDateTime updateTime;
 
-//    private Long boardId;
     private List<BoardEntity> boardEntities;
+
+    private List<ItemEntity> itemEntities;
 
 
 

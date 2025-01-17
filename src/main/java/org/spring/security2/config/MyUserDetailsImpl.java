@@ -92,4 +92,8 @@ public class MyUserDetailsImpl implements UserDetails , OAuth2User {
     public String getName() {
         return memberEntity.getUserName();
     }
+
+    public Long getId() {
+        return memberEntity.getId();
+    }
 }

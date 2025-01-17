@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang=”ko” xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>itemList</title>
+</head>
+<body>
+<div class="itemList">
+    <div class="itemList-con">
+        <table>
+            <thead>
+            <tr>
+                <td>id</td>
+                <td>itemName</td>
+                <td>itemDetail</td>
+                <td>itemWriter</td>
+                <td>itemPrice</td>
+                <td>hit</td>
+                <td>isImage</td>
+                <td>작성자</td>
+                <td>생성시간</td>
+                <td>수정시간</td>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:if="itemList!=null">
+                <tr th:each=" item: ${itemList} ">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.itemName}"></td>
+                    <td th:text="${item.itemDetail}"></td>
+                    <td th:text="${item.itemWriter}"></td>
+                    <td th:text="${item.itemPrice}"></td>
+                    <td th:text="${item.hit}"></td>
+                    <td th:text="${item.isImage}"></td>
+                    <td th:text="${item.memberId}"></td>
+                    <td th:text="${#temporals.format(item.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${#temporals.format(item.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td><a th:href="@{/item/detail/{id}(id=${item.id})}"><span th:text="${item.itemName}"></span></a></td>
+                </tr>
+            </th:block>
+            <th:block th:unless="itemList!=null">
+                <tr>
+                    <td colspan="11">조회할 목록이 없습니다!</td>
+                </tr>
+            </th:block>
+
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
